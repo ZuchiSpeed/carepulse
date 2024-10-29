@@ -9,9 +9,9 @@ import { useForm } from "react-hook-form";
 import { Form } from "../ui/form";
 import SubmitButton from "../SubmitButton";
 import { UserFormValidation } from "@/lib/validation";
-import { createUser } from "@/lib/actions/patient.actions";
 import { useRouter } from "next/navigation";
 import CustomFormField from "../CustomFormField";
+import { createUser } from "@/lib/actions/patient.actions";
 
 //enum form types
 export enum FormFieldType {
@@ -43,11 +43,11 @@ const PatientForm = () => {
     setIsLoading(true)
 
     try {
-      // const userData = { name, email, phone }
+      const userData = { name, email, phone }
 
-      // const user = await createUser(userData)
+      const user = await createUser(userData)
 
-      // if(user) router.push('/patients/${user.$id/register')
+      if(user) router.push(`/patients/${user.$id}/register`)
     } catch (error) {
       console.log(error)
     }
