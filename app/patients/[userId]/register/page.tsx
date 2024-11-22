@@ -1,10 +1,14 @@
-import RegisterForm from '@/components/forms/RegisterForm'
-import { getUser } from '@/lib/actions/patient.actions'
-import Image from 'next/image'
-import React from 'react'
+import RegisterForm from "@/components/forms/RegisterForm";
+import { getUser } from "@/lib/actions/patient.actions";
+import Image from "next/image";
+import React from "react";
+
+import * as Sentry from "@sentry/nextjs";
 
 const Register = async ({ params: { userId } }: SearchParamProps) => {
-  const user = await getUser(userId)
+  const user = await getUser(userId);
+
+  Sentry.metrics.set("user_view_register", user.name);
 
   return (
     <div className="flex h-screen max-h-screen">
@@ -32,7 +36,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
         className="side-img max-w-[390px]"
       />
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
